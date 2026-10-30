@@ -12,19 +12,19 @@ class Registration extends Model
     protected $fillable = [
         'student_id',
         'course_id',
-        'registration',
-        'station',
+        'registration_date',
+        'status',
     ];
 protected $casts =[
     'registration_date' => 'date'
 ];
 
-public function student():BelongsTo
+public function student():BelongsToMany
 {
     return
     $this-> belongTO(Student::class);
 }
-public function course():BelongsToMany
+public function course():BelongsToOne
 {
      return
     $this-> belongsToMany(Course::class);
