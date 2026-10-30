@@ -15,16 +15,16 @@ class Student extends Model
         'email',
         'phone',
         'gender',
-        'cousre_of_study',
+        'course_of_study',
     ];
     //One student has many registrations
-public function reegistrations():HasMany
+public function registrations():HasMany
 {
     return
     $this-> hasMany(Registration::class);
 }
 //one can register for many courses
-public function course():BelongsToMany
+public function courses():BelongsToMany
 {
      return
     $this-> belongsToMany(Student::class,
