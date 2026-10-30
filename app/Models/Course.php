@@ -26,7 +26,7 @@ public function course():BelongsToMany
 {
     return
     $this-> belongsToMany(Student::class,
-    'registration')
+    'registrations')
     ->withPivot('id','registration_date','status')
     ->withTimestamps();
 }
