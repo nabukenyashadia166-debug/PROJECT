@@ -24,7 +24,7 @@ public function registrations():HasMany
     $this-> hasMany(Registration::class);
 }
 //one can register for many courses
-public function courses():BelongsToMany
+public function course():BelongsToMany
 {
      return
     $this-> belongsToMany(Student::class,

@@ -24,7 +24,8 @@ public function student():BelongsToMany
     return
     $this-> belongTO(Student::class);
 }
-public function course():BelongsToOne
+
+public function course():BelongsToMany
 {
      return
     $this-> belongsToMany(Course::class);
