@@ -3,31 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Registration extends Model
 {
-
     protected $fillable = [
         'student_id',
         'course_id',
         'registration_date',
         'status',
     ];
-protected $casts =[
-    'registration_date' => 'date'
-];
 
-public function student():BelongsToMany
-{
-    return
-    $this-> belongTO(Student::class);
-}
+    protected $casts = [
+        'registration_date' => 'date',
+    ];
 
-public function course():BelongsToMany
-{
-     return
-    $this-> belongsToMany(Course::class);
-}
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

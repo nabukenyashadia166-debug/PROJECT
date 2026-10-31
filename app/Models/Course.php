@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
-
     protected $fillable = [
         'course_code',
         'course_name',
@@ -17,18 +16,15 @@ class Course extends Model
         'credit_units',
     ];
 
-public function registrations():HasMany
-{
-    return
-    $this-> hasMany(Registration::class);
-}
-public function course():BelongsToMany
-{
-    return
-    $this-> belongsToMany(Student::class,
-    'registrations')
-    'registration')
-    ->withPivot('id','registration_date','status')
-    ->withTimestamps();
-}
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, 'registrations')
+            ->withPivot('id', 'registration_date', 'status')
+            ->withTimestamps();
+    }
 }
