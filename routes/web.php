@@ -61,3 +61,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/registrations/create', [Student\RegistrationController::class, 'create'])->middleware('permission:register course')->name('registrations.create');
     Route::post('/registrations', [Student\RegistrationController::class, 'store'])->middleware('permission:register course')->name('registrations.store');
 });
+use App\Http\Controllers\StudentController;
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('students', StudentController::class);
+});
