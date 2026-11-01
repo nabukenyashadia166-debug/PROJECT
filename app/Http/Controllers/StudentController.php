@@ -4,62 +4,53 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private function rules($id = null): array
+    {
+        return [
+            'student_name'    => 'required|string|max:255',
+            'first_name'      => 'required|string|max:255',
+            'email'           => ['required', 'email', 'max:255', Rule::unique('students', 'email')->ignore($id)],
+            'phone'           => 'nullable|string|max:20',
+            'gender'          => 'nullable|in:Male,Female,Other',
+            'course_of_study' => 'nullable|string|max:255',
+        ];
+    }
+
     public function index()
     {
-        //
+        $students = Student::latest()->paginate(10);
+        return view('admin.students.index', compact('students'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.students.list', ['student' => null]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Student::create($request->validate($this->rules()));
+        return redirect()->route('admin.students.index')->with('success', 'Student added.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Student $student)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Student $student)
     {
-        //
+        return view('admin.students.form', compact('student'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update($request->validate($this->rules($student->id)));
+        return redirect()->route('admin.students.index')->with('success', 'Student updated.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('admin.students.index')->with('success', 'Student deleted.');
     }
 }
