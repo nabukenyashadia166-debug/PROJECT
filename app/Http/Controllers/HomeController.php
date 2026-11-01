@@ -2,64 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Home;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view('home');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function home()
+    {
+        return view('home');
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
+
+    public function adminDashboard()
+    {
+        return view('admin.dashboard');
+    }
+
     public function create()
     {
-        //
+        return redirect()->route('home');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('home');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Home $home)
+    public function show($id = null)
     {
-        //
+        return redirect()->route('home');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Home $home)
+    public function edit($id = null)
     {
-        //
+        return redirect()->route('home');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Home $home)
+    public function update(Request $request, $id = null)
     {
-        //
+        return redirect()->route('home');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Home $home)
+    public function destroy($id = null)
     {
-        //
+        return redirect()->route('home');
     }
 }
